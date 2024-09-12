@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::middleware('auth')
+->group(function() {
+    Route::get('/', IndexController::class)->name('home');
+    Route::resource('site', SiteController::class);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout_do');
 });
+
+Route::controller(AuthController::class)
+->middleware('guest')
+->group(function() {
+    Route::post('/login', 'login')->name('login_do');
+
+});
+
+Route::inertia('/login', 'Auth/Login')->name('login');
+
+
