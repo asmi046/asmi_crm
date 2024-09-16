@@ -28,10 +28,12 @@ class SiteSeeder extends Seeder
                 if (in_array($name, ['Key Password', 'Untitled', 'mkc2018', 'Логин', 'Пароль'])) continue;
                 if ($file_info->getExtension() !== "md") continue;
 
+                $file_content = str_replace("strong", "b",Str::markdown(file_get_contents($patch.'/'.$value)));
+
                 DB::table("sites")->insert(
                     [
                         'name' => $name,
-                        'description' => Str::markdown(file_get_contents($patch.'/'.$value))
+                        'description' => $file_content
                     ]
                 );
             }
