@@ -19,7 +19,15 @@ createInertiaApp({
         .mixin({methods:{route: window.route}})
         .use(PrimeVue, {
             theme: {
-                preset: Aura
+                preset: Aura,
+                options: {
+                    prefix: 'p',
+                    darkModeSelector: 'system',
+                    cssLayer: {
+                        name: 'primevue'
+                    }
+                }
+
             }
         })
         .use(ToastService)

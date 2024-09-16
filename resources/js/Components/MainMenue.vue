@@ -32,33 +32,44 @@
             icon: 'pi pi-home',
             url: route('home'),
             active:true,
-            command: (menu_item)=> {
-                setActive(menu_item.item)
-            }
+        },
+        {
+            label: 'Сметы',
+            icon: 'pi pi-dollar',
+            url: route('pay.index'),
+            active:false,
+        },
+        {
+            label: 'Текущие задачи',
+            icon: 'pi pi-list-check',
+            url: route('day_work.index'),
+            active:false,
         },
         {
             label: 'Сайты',
             icon: 'pi pi-star',
             url: route('site.index'),
             active:false,
-            command: (menu_item)=> {
-                setActive(menu_item.item)
-            }
         }
     ])
 
     const logout = () => {
         router.visit(route('logout_do'), { method:'get' })
-            // .then((resp) => {
-            //     router.visit(route('login'))
-            // })
     }
 
-    const setActive = (item) => {
+
+
+    router.on('navigate', (event) => {
+        // console.log(event.detail.page)
+        console.log(`Navigated to ${event.detail.page.url}`)
+        if (event.detail.page.url == "/") {
+            items.value[0].active = true
+        }
+        else
         items.value.forEach((element)=>{
-            element.active = (element.label == item.label)
-        })
-    }
 
-    setActive(items.value[0])
+            element.active = (element.url.indexOf(event.detail.page.url) >= 0)
+        })
+    })
+
 </script>

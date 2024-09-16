@@ -1,11 +1,15 @@
 <template>
     <div class="editorjs" ref="htmlelement"></div>
-  </template>
-  <script setup>
+</template>
+
+<script setup>
   import EditorJS from '@editorjs/editorjs';
   import EmbedTool from '@editorjs/embed';
   import ListTool from '@editorjs/list';
   import ImageTool from '@editorjs/image';
+  import Header from '@editorjs/header';
+  import RawTool from '@editorjs/raw';
+  import LinkTool from '@editorjs/link';
 //   import VideoTool from './editorjs/video.js';
   import { onMounted, onUnmounted, ref, watch } from 'vue';
 
@@ -34,7 +38,7 @@
     updatingModel = true;
 
     editor.save().then((outputData) => {
-      console.log(event, 'Saving completed: ', outputData)
+    //   console.log(event, 'Saving completed: ', outputData)
       emit('update:modelValue', outputData);
     }).catch((error) => {
       console.log(event, 'Saving failed: ', error)
@@ -52,6 +56,8 @@
         embed: EmbedTool,
         list: ListTool,
         image: ImageTool,
+        header: Header,
+        raw: RawTool,
       },
       minHeight: 'auto',
       data: props.modelValue,

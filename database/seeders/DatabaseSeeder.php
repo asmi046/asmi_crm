@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                SiteSeeder::class
+                SiteSeeder::class,
+                PaySeeder::class,
+                DayWorkSeeder::class,
             ]
         );
         // \App\Models\User::factory(10)->create();

@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\DayWorkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,8 @@ Route::middleware('auth')
 ->group(function() {
     Route::get('/', IndexController::class)->name('home');
     Route::resource('site', SiteController::class);
+    Route::resource('pay', PayController::class);
+    Route::resource('day_work', DayWorkController::class);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout_do');
 });
 

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Site;
 use Inertia\Inertia;
+use App\Models\DayWork;
 use Illuminate\Http\Request;
 
-class SiteController extends Controller
+class DayWorkController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Sites/Sites',[
-            "sites" => Site::all()
+        return Inertia::render('DayWorks/DayWorks',[
+            "works" => DayWork::all()
         ]);
     }
 
@@ -37,7 +37,7 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Site $site)
+    public function show(DayWork $dayWork)
     {
         //
     }
@@ -45,7 +45,7 @@ class SiteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Site $site)
+    public function edit(DayWork $dayWork)
     {
         //
     }
@@ -53,22 +53,15 @@ class SiteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request, DayWork $dayWork)
     {
-        $site->update(
-            $request->validate([
-                'name' => ['required', 'string'],
-                'description' => ['required', 'string']
-            ])
-        );
-
-        return redirect()->route('site.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Site $site)
+    public function destroy(DayWork $dayWork)
     {
         //
     }
