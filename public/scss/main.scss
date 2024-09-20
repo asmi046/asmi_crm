@@ -27,6 +27,15 @@ section {
     }
 }
 
+.form_body {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        margin: 5px 0
+    }
+}
+
 @import 'scroll';
 @import 'auth';
 @import 'drawer';

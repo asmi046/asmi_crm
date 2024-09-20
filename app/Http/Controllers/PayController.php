@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pay;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Http\Requests\PayRequest;
 
 class PayController extends Controller
 {
@@ -13,6 +14,11 @@ class PayController extends Controller
      */
     public function index()
     {
+        $pays = Pay::all()->map(function ($item) {
+            $item->price = (int)$item->price + 1;
+            return $item;
+        });
+
         return Inertia::render('Pay/Pay',[
             "pays" => Pay::all()
         ]);
@@ -53,9 +59,13 @@ class PayController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pay $pay)
+    public function update(PayRequest $request, Pay $pay)
     {
-        //
+        $data = $request->validated();
+
+        $pay->update( $data );
+
+        return redirect()->route('pay.index');
     }
 
     /**

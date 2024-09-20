@@ -16,4 +16,8 @@ class Pay extends Model
         'complet',
         'price',
     ];
+
+    protected $casts = [
+        'price' => 'float',
+    ];
 }
