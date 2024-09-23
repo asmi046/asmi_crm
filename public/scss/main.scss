@@ -36,6 +36,23 @@ section {
     }
 }
 
+.tolbar_wrapper {
+    display: flex;
+
+    .p-select {
+        margin-left: 10px;
+        flex: 1;
+        width: 200px;
+    }
+}
+
+.ml {
+    margin-left: 10px;
+}
+.mr {
+    margin-right: 10px;
+}
+
 @import 'scroll';
 @import 'auth';
 @import 'drawer';

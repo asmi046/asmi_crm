@@ -14,13 +14,15 @@ class PayController extends Controller
      */
     public function index()
     {
-        $pays = Pay::all()->map(function ($item) {
-            $item->price = (int)$item->price + 1;
-            return $item;
-        });
+
+        $all_pay = Pay::all();
+        $clients = Pay::select("client")->groupBy('client')->get();
+
+        trap($clients);
 
         return Inertia::render('Pay/Pay',[
-            "pays" => Pay::all()
+            "pays" => $all_pay,
+            "clients" => $clients
         ]);
     }
 
@@ -29,15 +31,19 @@ class PayController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PayRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $pay = Pay::create( $data );
+
+        return redirect()->route('pay.index');
     }
 
     /**
@@ -73,6 +79,8 @@ class PayController extends Controller
      */
     public function destroy(Pay $pay)
     {
-        //
+        $pay->delete();
+
+        return redirect()->route('pay.index');
     }
 }

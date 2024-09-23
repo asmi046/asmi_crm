@@ -1,6 +1,10 @@
 <template>
 
     <Toolbar>
+        <template #end>
+            <ToggleSwitch v-model="onlyActive" /> <p class="ml">Только активные</p>
+        </template>
+
         <template #start>
             <div class="tolbar_wrapper">
                 <Button @click.prevent="showAddDialog = true" icon="pi pi-plus" class="mr-2" severity="main" title="Добавить "  />
@@ -16,15 +20,13 @@
 
             <div class="form_body">
                 <InputText v-model="addingData.client" type="text" placeholder="Клиент" fluid />
-                <DatePicker v-model="addingData.do_time" :dateFormat="'dd.mm.yy'" fluid />
                 <InputText v-model="addingData.name" type="text" placeholder="Работа" fluid />
-                <InputNumber v-model="addingData.price" mode="currency" currency="RUB" locale="ru-RU" fluid placeholder="Цена" />
             </div>
 
 
         <template #footer>
             <Button label="Отмена" text severity="secondary" @click="visible = false" autofocus />
-            <Button label="Сохранить" outlined severity="secondary" @click.prevent="createProduct" autofocus />
+            <Button label="Сохранить" outlined severity="secondary" @click.prevent="createWork" autofocus />
         </template>
     </Dialog>
 
@@ -35,12 +37,17 @@
     import { router } from '@inertiajs/vue3'
 
     import { useToast } from "primevue/usetoast";
-    const toast = useToast();
+    import { useStore } from 'vuex';
+
+    const toast = useToast()
+    const store = useStore()
 
     const props = defineProps({
         clients: Array,
         modelValue: String
     })
+
+    let onlyActive = ref(store.getters.onlyActiveWorks)
 
     let selectedElement = ref(props.modelValue)
     const emit = defineEmits(['update:modelValue'])
@@ -51,6 +58,9 @@
         clientList.value.push({label:props.clients[element].client, value:props.clients[element].client})
     }
 
+    watch(onlyActive, (newValue) => {
+        store.commit('setOnlyActiveWorks', newValue)
+    })
 
     let showAddDialog = ref(false)
     let selectedCa = ref("")
@@ -70,9 +80,8 @@
     }
 
 
-    const createProduct = () => {
-        console.log(addingData.value)
-        router.visit(route('pay.store'), {
+    const createWork = () => {
+        router.visit(route('day_work.store'), {
             method: 'post',
             data: addingData.value,
             onSuccess: page => {

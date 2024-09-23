@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\DayWork;
 use Illuminate\Http\Request;
+use App\Http\Requests\DayWorkRequest;
 
 class DayWorkController extends Controller
 {
@@ -13,8 +14,10 @@ class DayWorkController extends Controller
      */
     public function index()
     {
+        $clients = DayWork::select("client")->groupBy('client')->get();
         return Inertia::render('DayWorks/DayWorks',[
-            "works" => DayWork::all()
+            "works" => DayWork::all(),
+            "clients" => $clients
         ]);
     }
 
@@ -29,9 +32,13 @@ class DayWorkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DayWorkRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $pay = DayWork::create( $data );
+
+        return redirect()->route('day_work.index');
     }
 
     /**
@@ -53,9 +60,11 @@ class DayWorkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DayWork $dayWork)
+    public function update(DayWorkRequest $request, DayWork $dayWork)
     {
-        //
+        $data = $request->validated();
+        $dayWork->update( $data );
+        return redirect()->route('day_work.index');
     }
 
     /**
@@ -63,6 +72,7 @@ class DayWorkController extends Controller
      */
     public function destroy(DayWork $dayWork)
     {
-        //
+        $dayWork->delete();
+        return redirect()->route('day_work.index');
     }
 }

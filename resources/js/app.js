@@ -4,6 +4,11 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 import All from './Layouts/All.vue';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
+
+import { store } from "./store"
+
+import { useStore } from 'vuex'
 
 createInertiaApp({
   resolve: name => {
@@ -13,7 +18,16 @@ createInertiaApp({
     return page
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+
+
+
+    createApp({
+        render: () => h(App, props),
+        setup() {
+            // const store = useStore()
+            // store.dispatch('initialSetings')
+        }
+    })
 
         .use(plugin)
         .mixin({methods:{route: window.route}})
@@ -31,6 +45,8 @@ createInertiaApp({
             }
         })
         .use(ToastService)
+        .use(ConfirmationService)
+        .use(store)
         .mount(el)
   },
 })

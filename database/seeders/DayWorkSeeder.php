@@ -16,10 +16,18 @@ class DayWorkSeeder extends Seeder
      */
     public function run(): void
     {
-        $csv = Reader::createFromPath(public_path('old_data/smets/smets.csv'), 'r');
+        $csv = Reader::createFromPath(public_path('old_data/works/works.csv'), 'r');
+        $csv->setHeaderOffset(0);
         $records = $csv->getRecords();
+
         foreach ($records as $item) {
-          print_r($item);
+            $data =  explode(' - ', $item['Задача']);
+
+            if (count($data) > 1)
+                DB::table("day_works")->insert([
+                    'name' => $data[1],
+                    'client' => $data[0],
+                ]);
         }
     }
 }

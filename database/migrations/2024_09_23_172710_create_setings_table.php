@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('day_works', function (Blueprint $table) {
+        Schema::create('setings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name', 500)->comment('Наименование задачи');
-            $table->string('client')->nullable()->comment('Имя клиента');
-            $table->string('status')->default('Активна')->comment('Статус задачи');
+            $table->string('name')->comment('Имя параметра');
+            $table->string('type')->comment('Тип параметра');
+            $table->string('value')->comment('Значение параметра');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('day_works');
+        Schema::dropIfExists('setings');
     }
 };

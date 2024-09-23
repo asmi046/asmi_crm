@@ -1,5 +1,6 @@
 <template>
     <Toast />
+    <ConfirmDialog></ConfirmDialog>
     <main-menue></main-menue>
     <section>
         <div class="_container">

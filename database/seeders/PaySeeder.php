@@ -23,10 +23,13 @@ class PaySeeder extends Seeder
 
             if (empty($item['Проект'])) continue;
 
+            $date_array = explode('/', $item['Дата']);
+
             DB::table("pays")->insert([
                 'name' => $item['Работа'],
                 'client' => $item['Проект'],
-                'do_time' => date("Y-m-d H:i:s", strtotime($item['Дата'])),
+                // 'do_time' => date("Y-m-d", strtotime($item['Дата'])),
+                'do_time' => $date_array[2]."-".$date_array[1]."-".$date_array[0],
                 'price' => $item["Цена"]
             ]);
         }
