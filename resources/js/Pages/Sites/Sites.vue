@@ -67,7 +67,7 @@
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     })
 
-    let showAddDialog = ref(true)
+    let showAddDialog = ref(false)
 
     let drawerVisible = ref(false)
     let drawerName = ref('Старт')

@@ -18,8 +18,6 @@ class PayController extends Controller
         $all_pay = Pay::all();
         $clients = Pay::select("client")->groupBy('client')->get();
 
-        trap($clients);
-
         return Inertia::render('Pay/Pay',[
             "pays" => $all_pay,
             "clients" => $clients
