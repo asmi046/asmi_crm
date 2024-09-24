@@ -25,7 +25,7 @@
 
 
         <template #footer>
-            <Button label="Отмена" text severity="secondary" @click="visible = false" autofocus />
+            <Button label="Отмена" text severity="secondary" @click="showAddDialog = false" autofocus />
             <Button label="Сохранить" outlined severity="secondary" @click.prevent="createWork" autofocus />
         </template>
     </Dialog>
@@ -67,7 +67,7 @@
 
     let addingData = ref({
         name: "",
-        client:  "",
+        client:  props.modelValue,
         do_time: new Date(),
         complet:  false,
         price: 0
