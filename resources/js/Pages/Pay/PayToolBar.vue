@@ -57,7 +57,7 @@
 
     let addingData = ref({
         name: "",
-        client:  "",
+        client:  props.modelValue,
         do_time: new Date(),
         complet:  false,
         price: 0

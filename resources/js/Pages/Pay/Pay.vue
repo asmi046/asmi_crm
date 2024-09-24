@@ -71,8 +71,6 @@
         clients: Array
     })
 
-
-
     const filters = ref({
         client: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     })
