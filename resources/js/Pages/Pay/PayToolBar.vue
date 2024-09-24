@@ -23,7 +23,7 @@
 
 
         <template #footer>
-            <Button label="Отмена" text severity="secondary" @click="visible = false" autofocus />
+            <Button label="Отмена" text severity="secondary" @click="showAddDialog = false" autofocus />
             <Button label="Сохранить" outlined severity="secondary" @click.prevent="createProduct" autofocus />
         </template>
     </Dialog>
