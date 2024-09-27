@@ -16,6 +16,7 @@ export const store = createStore({
             state.selected_client_work = value
         },
         setOnlyActiveWorks (state, value) {
+            localStorage.setItem('only_active_works', value)
             state.only_active_works = value
         },
     },
@@ -35,8 +36,8 @@ export const store = createStore({
     },
 
     actions: {
-        initialSetings(context) {
-
+        initialStorage(context) {
+            context.commit('setOnlyActiveWorks', localStorage.getItem('only_active_works'))
         }
     }
   })

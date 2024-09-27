@@ -47,18 +47,21 @@
         modelValue: String
     })
 
-    let onlyActive = ref(store.getters.onlyActiveWorks)
+    let onlyActive = ref((store.getters.onlyActiveWorks === "true"))
+    console.log(onlyActive.value)
 
     let selectedElement = ref(props.modelValue)
     const emit = defineEmits(['update:modelValue'])
 
     let clientList = ref([])
 
+    clientList.value.push({label:"Все клиенты", value:""})
     for ( let element in props.clients) {
         clientList.value.push({label:props.clients[element].client, value:props.clients[element].client})
     }
 
     watch(onlyActive, (newValue) => {
+        console.log(onlyActive.value)
         store.commit('setOnlyActiveWorks', newValue)
     })
 

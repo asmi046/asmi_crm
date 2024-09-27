@@ -71,6 +71,7 @@
 
     let selectedClient = ref(store.getters.selectedClientWork)
     filters.value.client.value = store.getters.selectedClientWork
+    filters.value.status.value = store.getters.onlyActiveWorks?"Активна":""
 
     watch(selectedClient, (newValue, oldValue) => {
         filters.value.client.value = newValue
@@ -105,7 +106,6 @@
 
     const onRowEditSave = (event) => {
         let { newData, index } = event
-        props.works[index] = newData
 
         console.log(newData)
 

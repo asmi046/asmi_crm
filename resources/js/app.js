@@ -24,8 +24,8 @@ createInertiaApp({
     createApp({
         render: () => h(App, props),
         setup() {
-            // const store = useStore()
-            // store.dispatch('initialSetings')
+            const store = useStore()
+            store.dispatch('initialStorage')
         }
     })
 

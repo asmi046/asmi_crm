@@ -47,6 +47,7 @@
 
     let clientList = ref([])
 
+    clientList.value.push({label:"Все клиенты", value:""})
     for ( let element in props.clients) {
         clientList.value.push({label:props.clients[element].client, value:props.clients[element].client})
     }
