@@ -71,7 +71,7 @@
 
     let selectedClient = ref(store.getters.selectedClientWork)
     filters.value.client.value = store.getters.selectedClientWork
-    filters.value.status.value = store.getters.onlyActiveWorks?"Активна":""
+    filters.value.status.value = (store.getters.onlyActiveWorks === "true")?"Активна":""
 
     watch(selectedClient, (newValue, oldValue) => {
         filters.value.client.value = newValue

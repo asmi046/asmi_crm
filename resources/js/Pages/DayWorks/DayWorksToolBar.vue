@@ -49,6 +49,7 @@
 
     let onlyActive = ref((store.getters.onlyActiveWorks === "true"))
     console.log(onlyActive.value)
+    console.log(typeof onlyActive.value)
 
     let selectedElement = ref(props.modelValue)
     const emit = defineEmits(['update:modelValue'])
