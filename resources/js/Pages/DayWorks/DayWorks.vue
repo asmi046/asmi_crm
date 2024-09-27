@@ -36,6 +36,8 @@
             <Column header="Управление">
                 <template #body="slotProps">
                     <Button @click.prevent="deleteElement(slotProps.data)" text icon="pi pi-trash" class="mr-2" severity="danger" title="Удалить"  />
+                    <Button @click.prevent="archivedRow(slotProps.data)" icon="pi pi-history" class="ml" severity="secondary" title="Архивировать"  />
+                    <Button @click.prevent="acceptedRow(slotProps.data)" icon="pi pi-check" class="ml" severity="success" title="Завершить"  />
                 </template>
             </Column>
         </DataTable>
@@ -83,9 +85,10 @@
     });
 
     const statusesList = [
-        {name: "Заверпшена", value:"Заверпшена"},
-        {name: "Активна", value:"Активна"},
+        {name: "Завершена", value:"Завершена"},
+        {name: "Архив", value:"Архив"},
         {name: "Срочная", value:"Срочная"},
+        {name: "Активна", value:"Активна"},
     ]
 
     const getSeverity = (product) => {
@@ -99,16 +102,15 @@
         case 'Срочная':
             return 'danger';
 
+        case 'Архив':
+            return 'secondary';
+
         default:
             return null;
     }
 };
 
-    const onRowEditSave = (event) => {
-        let { newData, index } = event
-
-        console.log(newData)
-
+    const updateRow = (newData) => {
         router.visit(route('day_work.update', newData.id), {
             method: 'put',
             data: newData,
@@ -121,7 +123,24 @@
                 });
             },
         })
+    }
+
+    const onRowEditSave = (event) => {
+        let { newData, index } = event
+        updateRow(newData)
     };
+
+    const archivedRow = (newData) => {
+        newData.status = "Архив"
+        updateRow(newData)
+    };
+
+    const acceptedRow = (newData) => {
+        newData.status = "Завершена"
+        updateRow(newData)
+    };
+
+
 
     const deleteElement = (element) => {
         confirm.require({

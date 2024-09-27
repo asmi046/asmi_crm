@@ -12,6 +12,23 @@ class DayWork extends Model
     public $fillable = [
         'name',
         'client',
-        'status'
+        'status',
+        'arch_time',
+        'check_time',
+        'archived',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (DayWork $work) {
+            if ($work->status === "Архив") {
+                $work->arch_time = now();
+                $work->archived = true;
+            }
+
+            if ($work->status === "Завершена") {
+                $work->check_time = now();
+            }
+        });
+    }
 }
