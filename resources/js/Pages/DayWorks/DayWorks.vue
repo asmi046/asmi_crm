@@ -66,14 +66,14 @@
 
     const filters = ref({
         client: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-        status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        status: { value: null, matchMode: FilterMatchMode.IN },
     })
 
     const store = useStore()
 
     let selectedClient = ref(store.getters.selectedClientWork)
     filters.value.client.value = store.getters.selectedClientWork
-    filters.value.status.value = (store.getters.onlyActiveWorks === "true")?"Активна":""
+    filters.value.status.value = (store.getters.onlyActiveWorks === "true")?["Активна", "Срочная"]:""
 
     watch(selectedClient, (newValue, oldValue) => {
         filters.value.client.value = newValue
@@ -81,7 +81,7 @@
     });
 
     watch(() => store.state.only_active_works, (newValue, oldValue) => {
-        filters.value.status.value = newValue?"Активна":""
+        filters.value.status.value = newValue?["Активна", "Срочная"]:""
     });
 
     const statusesList = [

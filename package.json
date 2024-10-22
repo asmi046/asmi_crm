@@ -10,6 +10,7 @@
         "composer_update": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && php composer.phar update\"",
         "pull_rep": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && git pull\"",
         "clean_rep": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && git clean -f\"",
+        "chmode": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html/public/ && chmod -R 775 build\"",
         "stash": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && git stash\"",
         "reset_rep": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && git reset --hard\"",
         "send_vite_build": "scp -C -r public/build user@31.129.110.173:web/crm.asmi-studio.ru/public_html/public",
@@ -28,7 +29,7 @@
         "optimize": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && php artisan optimize\"",
         "optimize_all": "npm run optimize && npm run cache_clear && npm run cache_view && npm run cache_route && npm run cache_config",
         "orchid_user": "ssh user@31.129.110.173 \"cd web/crm.asmi-studio.ru/public_html && php artisan orchid:admin admin asmi046@gmail.com 123\"",
-        "deploy_m": "vite build && npm run send_vite_build && npm run pull_rep && npm run optimize_all"
+        "deploy_m": "vite build && npm run send_vite_build && npm run pull_rep && npm run optimize_all && npm run chmode"
     },
     "devDependencies": {
         "@primevue/auto-import-resolver": "^4.0.5",
