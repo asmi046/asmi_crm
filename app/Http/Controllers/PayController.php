@@ -15,8 +15,8 @@ class PayController extends Controller
     public function index()
     {
 
-        $all_pay = Pay::all();
-        $clients = Pay::select("client")->groupBy('client')->get();
+        $all_pay = Pay::where('complet', false)->get();
+        $clients = Pay::select("client")->where('complet', false)->groupBy('client')->get();
 
         return Inertia::render('Pay/Pay',[
             "pays" => $all_pay,

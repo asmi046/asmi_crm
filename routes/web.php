@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DayWorkController;
+use App\Http\Controllers\PayOperationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::middleware('auth')
     Route::get('/', IndexController::class)->name('home');
     Route::resource('site', SiteController::class);
     Route::resource('pay', PayController::class);
+
+    Route::patch('/pay_msaa_check', [PayOperationController::class, 'pay_msaa_check'])->name('pay_msaa_check');
+
     Route::resource('day_work', DayWorkController::class);
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout_do');
 });

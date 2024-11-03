@@ -4,13 +4,16 @@
     </Head>
     <h1>Сметы</h1>
 
-    <pay-tool-bar :clients="props.clients" v-model="selectedClient"></pay-tool-bar>
+    <pay-tool-bar :clients="props.clients" v-model="selectedClient" v-model:selected="selectedProduct"></pay-tool-bar>
 
     <div class="card">
         <DataTable  :value="props.pays" editMode="cell" dataKey="id" @cell-edit-complete="onRowEditSave"
             v-model:filters="filters"
+            v-model:selection="selectedProduct"
             :globalFilterFields="['client']"
         >
+
+            <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
             <Column field="client" header="Клиент" style="width: 20%">
                 <template #editor="{ data, field }">
                     <InputText v-model="data[field]" fluid />
@@ -65,6 +68,7 @@
 
     const toast = useToast();
     const confirm = useConfirm();
+    const selectedProduct = ref();
 
     const props = defineProps({
         pays: Array,
