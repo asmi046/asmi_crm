@@ -15,7 +15,7 @@ class DayWorkController extends Controller
     public function index()
     {
         $clients = DayWork::select("client")->groupBy('client')->get();
-        return Inertia::render('DayWorks/DayWorks',[
+        return Inertia::render('DayWorks/DayWorks', [
             "works" => DayWork::orderBy('created_at', 'DESC')->get(),
             "clients" => $clients
         ]);
