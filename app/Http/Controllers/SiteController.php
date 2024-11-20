@@ -23,7 +23,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -31,7 +31,8 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pay = Site::create( $request->all() );
+        return redirect()->route('site.index');
     }
 
     /**

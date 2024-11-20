@@ -4,11 +4,8 @@
 </Head>
 
 <h1>Сайты</h1>
-<Toolbar>
-    <template #start>
-        <Button icon="pi pi-plus" class="mr-2" severity="main" title="Добавить сайт"  />
-    </template>
-</Toolbar>
+
+<sites-tool-bar></sites-tool-bar>
 
 <Dialog v-model:visible="showAddDialog" modal header="Edit Profile" :style="{ width: '25rem' }">
     <template #header>
@@ -53,6 +50,7 @@
     import Column from 'primevue/column';
     import Drawer from 'primevue/drawer';
     import Button from 'primevue/button';
+    import SitesToolBar from './SitesToolBar.vue';
     import EditorHtml from '../../Components/EditorHtml.vue';
     import { FilterMatchMode } from '@primevue/core/api';
     import InputText from 'primevue/inputtext';
